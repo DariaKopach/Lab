@@ -8,6 +8,8 @@
 
 package com.company;
 
+import jdk.internal.org.objectweb.asm.Handle;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -51,12 +53,12 @@ public class Main {
         // 2. Count the lines where the word "Harry" is met.
 
         String word = "Harry";
-        int harry = 0;
+        int Harry = 0;
         for (int j = 0; j < words.length; j++) {
             if (words[j].equals("Harry"))
-                harry ++;
+                Harry ++;
         }
-        System.out.println("The word " + word + " conteins " + harry + " times in the above book");
+        System.out.println("The word " + word + " contains " + Harry + " times in the above book");
 
         // 3. Take array of distinct words from Harry Potter. Create an array of hashes.
 
