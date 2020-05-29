@@ -56,7 +56,7 @@ public class Main {
             if (words[j].equals("Harry"))
                 harry ++;
         }
-        System.out.println("The word " + word + " occurs " + harry + " times in the above book");
+        System.out.println("The word " + word + " conteins " + harry + " times in the above book");
 
         // 3. Take array of distinct words from Harry Potter. Create an array of hashes.
 
