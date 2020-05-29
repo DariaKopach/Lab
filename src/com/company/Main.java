@@ -1,66 +1,100 @@
+/*
+ * Lab 1
+ *
+ * Version 1.0
+ *
+ * Copyright Kopach Daria KNTEU
+ */
+
 package com.company;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) {
-	/*byte date = 27;
-	System.out.println("Today is " + date + " May");
-	short year = 2020;
-	System.out.println("Today is " + year + " year");
-	int distance  = 103030;
-	System.out.println("Distance between Kyiv and Zhytomyr is " + distance + " km2");
-	long area = 10_303_000_00;
-	System.out.println("Area of Europe is " + area + " km2");
-	float weight = 55.5f;
-	System.out.println("My weight is " + weight);
-	double Pi = 3.14;
-	System.out.println("The Pi number is appr equal to " + Pi);
-	boolean m = true;
-	System.out.println(m);
+    public static void main(String[] args) throws IOException {
 
-        for (int i = 0; i <= 10; i++) {
-            System.out.println("sin(" + i + ") = " + Math.sin(i));
-        }
+        String text = new String(Files.readAllBytes(Paths.get("C:\\Users\\Nastya\\Desktop\\Harry.txt")));
 
+        String cleanerText = text
+                .replaceAll("\\.", "")
+                .replaceAll(",", "")
+                .replaceAll("\"", "")
+                .replaceAll("!", "")
+                .replaceAll(";", "")
+                .replaceAll(":", "")
+                .replaceAll("\\?", "")
+                .replaceAll("\\(", "")
+                .replaceAll("\\)", "")
+                .replaceAll("\\!", "")
+                .replaceAll("\"", "")
+                .replaceAll("-", "")
+                .toLowerCase()
+                ;
 
-        String[] words = new String[10];
-        words[0] = "Hello";
-        words[1] = "world";
-        words[2] = "mama";
-        words[3] = "Spring";
-        words[4] = "frame" ;
-        words[5] = "Show";
-        words[6] = "must";
-        words[7] = "go";
-        words[8] = "on";
-        words[9] = "Queen";
+        //1.  Find the longest word in the above text.
 
-        for (int i = 0; i < words.length; i++) {
-            if (   words[i].contains("a") && words[i].contains("m") && words[i].length() > 4)  {
-                System.out.println(i + "." + words[i] + " - " + words[i].length() + " letters ");
+        String words[] = text.split("[^a-zA-Z]");
+
+        String longest = "";
+
+        for (int k=0; k < words.length; k++) {
+            if ( words[k].length() > longest.length() ) {
+                longest = words[k];
             }
         }
-        */
-      //  String word = "ABBA";
-        String word = "А в Енесее - сенева";
-        word = word.toLowerCase(); // всі малі
-        word = word.replaceAll(" ","");
-        word = word.replaceAll("-","");
+        System.out.println("Longest word is" + longest);
 
-        String template = "";
+        // 2. Count the lines where the word "Harry" is met.
 
-        for (int i = 0; i < word.length(); i++) {
-            int index = word.length() - i -1;
-            template +=  word.charAt(index);
+        String word = "Harry";
+        int harry = 0;
+        for (int j = 0; j < words.length; j++) {
+            if (words[j].equals("Harry"))
+                harry ++;
+        }
+        System.out.println("The word " + word + " occurs " + harry + " times in the above book");
+
+        // 3. Take array of distinct words from Harry Potter. Create an array of hashes.
+
+        String distinсtString = " ";
+
+        for (int j = 0; j < words.length; j++) {
+            if (!distinсtString.contains(words[j])) {
+                distinсtString += words[j] + " ";
+            }
+        }
+        String[] distinctArray = distinсtString.split(" ");
+        for (int j = 0; j < distinctArray.length; j++) {
+            System.out.println(distinctArray[j].hashCode());
         }
 
-        String [] palindroms = new String [5];
+       // 4. Count the intersections.
 
-        System.out.println(template);
+        int dictinct = 0;
+        int dublicate = 0;
+        String previous = "";
+        String current = "";
 
-        if (word.equals(template)){
-            System.out.println("polindrom");
-        } else {
-            System.out.println ("not polindrom");
+        for (int i=0; i < words.length; i++) {
+            current = words[i];
+            if ( !previous.equals(current) ) {
+                if ( dictinct > 1 ) {
+                    dublicate++;
+                }
+                dictinct = 1;
+                previous = current;
+            } else {
+                dictinct++;
+            }
         }
-    }}
+        if ( dictinct > 1 ) {
+            dublicate++;
+        }
+        System.out.println(dublicate + " is number of dublicated words");
+    }
+
+}
